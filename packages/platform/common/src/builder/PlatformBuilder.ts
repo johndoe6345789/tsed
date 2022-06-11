@@ -294,10 +294,12 @@ export class PlatformBuilder<App = TsED.Application, Router = TsED.Router> {
     // istanbul ignore next
     if (this.settings.get("logger.level") !== "off") {
       const {PlatformLogMiddleware} = await import("@tsed/platform-log-middleware");
+      console.log("===> PlatformLogMiddleware loaded");
       this.app.use(PlatformLogMiddleware);
     }
 
     if (this.settings.get("acceptMimes", []).length) {
+      console.log("===> GlobalAcceptMimesMiddleware loaded");
       this.app.use(GlobalAcceptMimesMiddleware);
     }
 

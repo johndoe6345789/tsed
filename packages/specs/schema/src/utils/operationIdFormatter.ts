@@ -1,5 +1,4 @@
-import {camelCase} from "camel-case";
-
+import changeCase from "change-case";
 const DEFAULT_PATTERN = "%c.%m";
 
 /**
@@ -10,7 +9,7 @@ export function operationIdFormatter(pattern: string = "") {
 
   const transform = (name: string, propertyKey: string) => {
     const str = (pattern || DEFAULT_PATTERN).replace(/%c/, name).replace(/%m/, propertyKey);
-    return pattern === "" ? camelCase(str) : str;
+    return pattern === "" ? changeCase.camelCase(str) : str;
   };
 
   return (name: string, propertyKey: string, path: string = "") => {
@@ -31,7 +30,7 @@ export function operationIdFormatter(pattern: string = "") {
       if (!OPERATION_IDS.has(operationKey)) {
         OPERATION_IDS.set(operationKey, 0);
 
-        return camelCase(`${operationId} By ${result}`);
+        return changeCase.camelCase(`${operationId} By ${result}`);
       }
     }
 
